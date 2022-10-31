@@ -20,34 +20,21 @@ namespace WindowsFormsApp21
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string datum = " ";
-            string jmeno = " ";
             string Jmeno_nejstarsiho = " ";
             DateTime Ted = DateTime.Now;
             DateTime Datum;
+
             foreach(string text in textBox1.Lines)
             {
-                foreach (char znak in text)
-                {
-                    if ((znak == '1') || (znak == '2') || (znak == '3') || (znak == '4') || (znak == '5') || (znak == '6') || (znak == '7') || (znak == '8') || (znak == '9') || (znak == '0') || (znak == '.'))
-                    {
-                        datum += znak;
-                    }
-                    else
-                    {
-                        jmeno += znak;
-                    }
-                }
-                if(DateTime.TryParse(datum, out Datum))
+                string[] datum = text.Split(';');
+                if(DateTime.TryParse(datum[2], out Datum))
                 {
                     if(Datum < Ted)
                     {
                         Ted = Datum;
-                        Jmeno_nejstarsiho = jmeno;
+                        Jmeno_nejstarsiho = datum[0] + " " + datum[1];
                     }
                 }
-                datum = " ";
-                jmeno = " ";
             }
             MessageBox.Show("nejstarsi je:" + Jmeno_nejstarsiho);
         }
